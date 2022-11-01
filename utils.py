@@ -1,6 +1,7 @@
 import json
 POST_PATH = 'data/posts.json'
 COMMENTS_PATH = 'data/comments.json'
+BOOKMARKS_PATH = 'data/bookmarks.json'
 
 
 def load_data(path):
@@ -71,3 +72,41 @@ def get_post_by_pk(pk):
     for post in posts:
         if post['pk'] == pk:
             return post
+
+
+def save_bookmark_to_json(bookmarks, path):
+    with open(path, 'w', encoding='utf-8') as file:
+        json.dump(bookmarks, file, ensure_ascii=False)
+
+
+def delete_bookmark(user_bookmark, bookmarks):
+    for index, bookmark in enumerate(bookmarks):
+        if bookmark == user_bookmark:
+            del bookmarks[index]
+            break
+
+    save_bookmark_to_json(bookmarks, BOOKMARKS_PATH)
+
+
+def add_bookmark(user_bookmark, bookmarks):
+    bookmarks.append(user_bookmark)
+    save_bookmark_to_json(bookmarks, BOOKMARKS_PATH)
+
+
+def bookmark_click(user_bookmark):
+    bookmarks = load_data(BOOKMARKS_PATH)
+    if user_bookmark in bookmarks:
+        delete_bookmark(user_bookmark, bookmarks)
+    else:
+        add_bookmark(user_bookmark, bookmarks)
+
+
+def get_bookmarks():
+    user_bookmark = []
+    posts = load_data(POST_PATH)
+    bookmarks = load_data(BOOKMARKS_PATH)
+    for post in posts:
+        if post['pk'] in bookmarks:
+            user_bookmark.append(post)
+
+    return user_bookmark

@@ -1,11 +1,10 @@
-import conftest
 from utils import *
 
 
 class TestUtils:
 
-    def test_load_data(self):
-        data = load_data(POST_PATH)
+    def test_load_data(self, get_data):
+        data = get_data[0]
         assert len(data) != 0, 'Ошибка загрузки файла'
 
     def test_get_post_by_user(self, get_data):

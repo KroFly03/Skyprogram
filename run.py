@@ -1,29 +1,29 @@
-from flask import Flask, jsonify
+from flask import Flask
 from main.view import main_blueprint
-from utils import *
+from api.view import api_blueprint
 import logging
 
 
 app = Flask(__name__)
 app.register_blueprint(main_blueprint)
+app.register_blueprint(api_blueprint)
+
+log_format = '%(asctime)s [%(levelname)s]Запрос %(message)s'
+
 app.logger.disabled = True
 log = logging.getLogger('werkzeug')
 log.disabled = True
-logging.basicConfig(filename='api.log', level=logging.INFO, encoding='utf-8', format='%(asctime)s [%(levelname)s]Запрос %(message)s')
+logging.basicConfig(filename='api.log', level=logging.INFO, encoding='utf-8', format=log_format)
 
 
-@app.route('/api/posts')
-def show_posts():
-    logging.info('api/posts')
-    posts = load_data(POST_PATH)
-    return jsonify(posts)
+@app.errorhandler(404)
+def not_found(e):
+    return 'Сервер не найден'
 
 
-@app.route('/api/posts/<int:post_id>')
-def show_post(post_id):
-    logging.info(f'api/posts/{post_id}')
-    post = get_post_by_pk(post_id)
-    return jsonify(post)
+@app.errorhandler(500)
+def internal_server_error(e):
+    return 'Ошибка сервера'
 
 
 if __name__ == '__main__':

@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, redirect
 from utils import *
 
 main_blueprint = Blueprint('main_blueprint', __name__, template_folder='templates')
@@ -7,7 +7,8 @@ main_blueprint = Blueprint('main_blueprint', __name__, template_folder='template
 @main_blueprint.route('/')
 def main_page():
     posts = load_data(POST_PATH)
-    return render_template('index.html', posts=posts)
+    bookmark_count = load_data(BOOKMARKS_PATH)
+    return render_template('index.html', posts=posts, bookmark_count=len(bookmark_count))
 
 
 @main_blueprint.route('/posts/<int:post_id>')
@@ -28,3 +29,15 @@ def search_post():
 def show_user(username):
     posts = get_post_by_user(username)
     return render_template('user-feed.html', posts=posts, username=username)
+
+
+@main_blueprint.route('/bookmarks/add/<int:post_id>')
+def add_to_bookmark(post_id):
+    bookmark_click(post_id)
+    return redirect('/', code=302)
+
+
+@main_blueprint.route('/bookmarks')
+def show_bookmarks():
+    bookmarks = get_bookmarks()
+    return render_template('bookmarks.html', bookmarks=bookmarks)
