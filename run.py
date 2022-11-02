@@ -18,15 +18,15 @@ log.disabled = True
 logging.basicConfig(filename='api.log', level=logging.INFO, encoding='utf-8', format=log_format)
 
 
-# Обработка ошибки 404
 @app.errorhandler(404)
 def not_found(e):
+    """Обработка ошибки 404"""
     return 'Сервер не найден'
 
 
-# Обработка ошибки 500
 @app.errorhandler(500)
 def internal_server_error(e):
+    """Обработка ошибки 500"""
     return 'Ошибка сервера'
 
 

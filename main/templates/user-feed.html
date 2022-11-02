@@ -26,8 +26,8 @@ SKYPROGRAM user feed
             <span class="item__username">{{ post.poster_name }}</span>
           </a>
         </div>
-        <a href="/post.html" class="item__post-link">
-          <img src="img/post5.jpg" alt="" width="348" class="item__post-img">
+        <a href="/posts/{{ post.pk }}" class="item__post-link">
+          <img src="{{ post.pic }}" alt="" width="348" class="item__post-img">
         </a>
         <p class="item__descr"><a href="#" class="item__tag">#food</a>{{ post.content|truncate(30, True) }}</p>
         <div class="item__post-info">
@@ -37,7 +37,7 @@ SKYPROGRAM user feed
           </div>
         </div>
         <div class="item__post-bottom">
-          <a href="/post/{{ post.pk }}" class="item__btn-more">Подробнее</a>
+          <a href="/posts/{{ post.pk }}" class="item__btn-more">Подробнее</a>
           <button type="button" class="item__bookmark-btn">
             <img src="img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
           </button>

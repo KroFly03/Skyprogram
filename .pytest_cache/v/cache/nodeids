@@ -1,0 +1,13 @@
+[
+  "tests/api_test.py::TestApi::test_api_get_post",
+  "tests/api_test.py::TestApi::test_api_get_posts",
+  "tests/api_test.py::TestApi::test_api_post",
+  "tests/api_test.py::TestApi::test_api_posts",
+  "tests/utils_test.py::TestUtils::test_check_exist_user_exist",
+  "tests/utils_test.py::TestUtils::test_check_unexist_user_exist",
+  "tests/utils_test.py::TestUtils::test_find_posts_by_key_word",
+  "tests/utils_test.py::TestUtils::test_get_comments_by_post_id",
+  "tests/utils_test.py::TestUtils::test_get_post_by_pk",
+  "tests/utils_test.py::TestUtils::test_get_post_by_user",
+  "tests/utils_test.py::TestUtils::test_load_data"
+]

@@ -1,0 +1,5 @@
+{
+  "tests/utils_test.py::TestUtils::test_check_unexist_user_exist": true,
+  "tests/api_test.py::TestApi::test_api_posts": true,
+  "tests/api_test.py::TestApi::test_api_post": true
+}
