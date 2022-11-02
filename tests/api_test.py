@@ -5,11 +5,13 @@ keys_should_be = {'content', 'likes_count', 'pic', 'pk', 'poster_avatar', 'poste
 
 class TestApi:
 
+    """Тестирование api на вывод постов: верный тип получаемых данных и проверка ключей"""
     def test_api_get_posts(self):
         response = run.app.test_client().get('/api/posts')
         assert type(response.json) == list, 'Возращается не список'
         assert response.json[0].keys() == keys_should_be, 'Возращаются неверные ключи'
 
+    """Тестирование api на вывод поста: верный тип получаемых данных и проверка ключей"""
     def test_api_get_post(self):
         response = run.app.test_client().get('/api/posts/1')
         assert type(response.json) == dict, 'Возращается не словарь'

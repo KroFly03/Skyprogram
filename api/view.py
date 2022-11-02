@@ -4,14 +4,14 @@ from utils import *
 
 api_blueprint = Blueprint('api_blueprint', __name__)
 
-
+# Вывод всех постов в формате json
 @api_blueprint .route('/api/posts')
 def show_posts():
     logging.info('api/posts')
     posts = load_data(POST_PATH)
     return jsonify(posts)
 
-
+# Вывод поста по номеру в формате json
 @api_blueprint .route('/api/posts/<int:post_id>')
 def show_post(post_id):
     logging.info(f'api/posts/{post_id}')
