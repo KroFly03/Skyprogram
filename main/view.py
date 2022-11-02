@@ -36,6 +36,7 @@ def bookmark_action(post_id):
     bookmark_click(post_id)
     return redirect('/', code=302)
 
+
 # Вывод всех закладок
 @main_blueprint.route('/bookmarks')
 def show_bookmarks():
